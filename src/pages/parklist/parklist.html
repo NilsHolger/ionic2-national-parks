@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>National Parks is beautiful USA</ion-title>
+  </ion-navbar>
+  <ion-toolbar>
+    <ion-searchbar [(ngModel)]="searchQuery" (ionInput)="getParks($event)">
+    </ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content overflow-scroll="true">
+<ion-list [virtualScroll]="parks" [headerFn]="customHeaderFn">
+  <ion-item-divider *virtualHeader="let header">
+      {{header}}
+  </ion-item-divider>
+  <!--<ion-item *virtualItem="let item">
+      Item: {{item}}
+  </ion-item>-->
+  <ion-item *virtualItem="let park" (click)="goParkDetails(park)" detail-push>
+  <ion-thumbnail item-left>
+      <ion-img src="assets/img/thumbs/{{park.image}}"></ion-img>
+  </ion-thumbnail>
+  <h2>
+      {{park.name}}
+  </h2>
+  <p>
+      {{park.state}}
+  </p>
+  </ion-item>
+</ion-list>
+</ion-content>
